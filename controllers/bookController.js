@@ -38,9 +38,19 @@ const bookController = {
     updateBook: async(req, res) => {
         try {
             const book = await Book.findById(req.params.id)
-            await Book.updateOne({ $set: req.body })
+            await book.updateOne({ $set: req.body })
 
             res.status(200).json('Updated successfully!')
+        } catch(err) {
+            res.status(500).json(err)
+        }
+    },
+    deleteBook: async(req, res) => {
+        try {
+            await Author.updateMany({ books: req.params.id }, { $pull: { books: req.params.id } })
+            await Book.findByIdAndDelete(req.params.id)
+
+            res.status(200).json('Deleted successfully!')
         } catch(err) {
             res.status(500).json(err)
         }
