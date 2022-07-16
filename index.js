@@ -1,3 +1,4 @@
+const authorRoute = require('./routes/author')
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
@@ -14,5 +15,6 @@ mongoose.connect(process.env.MONGODB_URL, () => console.log('Connected to MongoD
 app.use(cors())
 app.use(morgan('common'))
 app.use(bodyParser.json({ limit:'50mb' }))
+app.use('/v1/author', authorRoute)
 
 app.listen(port, () => console.log(`Server running on port: http://localhost:${port}`))
