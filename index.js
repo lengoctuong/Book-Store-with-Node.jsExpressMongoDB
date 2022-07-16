@@ -1,4 +1,5 @@
 const authorRoute = require('./routes/author')
+const bookRoute = require('./routes/book')
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
@@ -15,6 +16,8 @@ mongoose.connect(process.env.MONGODB_URL, () => console.log('Connected to MongoD
 app.use(cors())
 app.use(morgan('common'))
 app.use(bodyParser.json({ limit:'50mb' }))
+
 app.use('/v1/author', authorRoute)
+app.use('/v1/book', bookRoute)
 
 app.listen(port, () => console.log(`Server running on port: http://localhost:${port}`))

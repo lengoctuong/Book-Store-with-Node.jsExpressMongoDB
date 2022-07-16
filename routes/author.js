@@ -5,5 +5,6 @@ const router = express.Router()
 
 router.post('/', authorController.addAuthor)
 router.get('/', authorController.getAllAuthors)
+router.get('/:id', authorController.getAnAuthor)
 
 module.exports = router
